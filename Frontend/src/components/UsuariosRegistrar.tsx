@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { registerUser } from '../api/auth.api';
 
 const Registration: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
-
+  const [nombre, setUsername] = useState('');
+  const [apellido, setLastname] = useState('');
+  const [correo, setEmail] = useState('');
+  const [contrasena, setPassword] = useState('');
+ 
   const handleRegistration = async () => {
     try {
-      const response = await registerUser({ username, password, email });
+      const response = await registerUser({ nombre, apellido, correo, contrasena});
       // Manejar la respuesta exitosa, por ejemplo, almacenar el token JWT.
       console.log('Registro exitoso:', response);
     } catch (error) {
@@ -26,17 +27,17 @@ const Registration: React.FC = () => {
             <input
               type="text"
               placeholder="Nombre de usuario"
-              value={username}
+              value={nombre}
               onChange={(e) => setUsername(e.target.value)}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-400"
             />
           </div>
           <div>
             <input
-              type="password"
-              placeholder="Contraseña"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              type="text"
+              placeholder="apellido"
+              value={apellido}
+              onChange={(e) => setLastname(e.target.value)}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-400"
             />
           </div>
@@ -44,8 +45,17 @@ const Registration: React.FC = () => {
             <input
               type="email"
               placeholder="Correo electrónico"
-              value={email}
+              value={correo}
               onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-400"
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="contraseña"
+              value={contrasena}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-400"
             />
           </div>

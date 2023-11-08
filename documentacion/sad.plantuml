@@ -1,0 +1,33 @@
+@startuml
+
+package "Proyecto" {
+  package "Backend" {
+    [Controllers]
+    [Database]
+    [Models]
+    [Routes]
+    
+    [Database] --> [Tabla1]
+    [Database] --> [Tabla2]
+  }
+
+  package "Frontend" {
+    package "src" {
+      [api]
+      [components]
+      [pages]
+      [routes]
+      [types]
+    }
+  }
+}
+
+database "Base de Datos MySQL" {
+  [Tabla1]
+  [Tabla2]
+}
+
+[Controllers] ..> [Database] : Usa
+[Models] ..> [Database] : Usa
+
+@enduml

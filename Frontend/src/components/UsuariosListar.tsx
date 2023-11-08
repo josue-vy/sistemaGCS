@@ -2,19 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from '../components/shared/sidebar';
 import { listUsers } from '../api/auth.api';
 
-interface User {
-    username: string;
-    email: string;
+interface Users {
+    nombre: string;
+    apellido: string;
+    correo: string;
     // Otras propiedades de usuario, si las hubiera
 }
 
 const UsuariosListar: React.FC = () => {
-    const [users, setUsers] = useState<User[]>([]); // Especifica que users es un array de tipo User
+    const [users, setUsers] = useState<Users[]>([]); // Especifica que users es un array de tipo User
 
     useEffect(() => {
         listUsers()
             .then((response) => {
-                setUsers(response.data as User[]); // Convierte la respuesta en un array de tipo User
+                setUsers(response.data as Users[]); // Convierte la respuesta en un array de tipo User
             })
             .catch((error) => {
                 console.error('Error al listar usuarios:', error);
@@ -29,7 +30,7 @@ const UsuariosListar: React.FC = () => {
                 <ul>
                     {users.map((user, index) => (
                         <li key={index} className="text-lg mb-2">
-                            <span className="font-semibold">{user.username}:</span> {user.email}
+                            <span className="font-semibold">{user.nombre}, {user.apellido}, {user.correo}</span>
                         </li>
                     ))}
                 </ul>
