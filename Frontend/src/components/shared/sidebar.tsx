@@ -69,10 +69,10 @@ const Sidebar: React.FC = () => {
         </div>
         {proyectosOpen && (
           <div className="pl-4">
-            <Link to="/proyectos/registrar" className="block text-white hover:text-blue-500 mb-2">
+            <Link to="/proyecto/registrar" className="block text-white hover:text-blue-500 mb-2">
               <FileText className="w-4 h-4 inline mr-1" /> Registrar Proyecto
             </Link>
-            <Link to="/proyectos/listar" className="block text-white hover:text-blue-500 mb-2">
+            <Link to="/proyecto/listar" className="block text-white hover:text-blue-500 mb-2">
               <Clipboard className="w-4 h-4 inline mr-1" /> Listar Proyecto
             </Link>
           </div>
