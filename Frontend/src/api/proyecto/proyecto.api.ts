@@ -1,11 +1,12 @@
 import axios from 'axios';
+import { ProyectoCreate } from '../../types/proyectoService';
 
 const baseUrl = 'http://localhost:3000';
 
-export const listProyecto = () => {
+export const getProyecto = () => {
     return axios.get(`${baseUrl}/proyecto`);
 };
 
-export const registerProyecto = async (userData: { codigoProyecto: string; nombreProyecto: string; fechaInicio: string ; fechaFinal: string ; estado: string}) => {
-  return axios.post(`${baseUrl}/usuarios`, userData);
+export const postProyecto = async (proyectoData: ProyectoCreate) => {
+  return axios.post(`${baseUrl}/proyecto`, proyectoData);
 };

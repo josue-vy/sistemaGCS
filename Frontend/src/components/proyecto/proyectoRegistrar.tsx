@@ -1,39 +1,48 @@
-import React, { useState } from 'react';
-import { registerProyecto } from '../../api/proyecto/proyecto.api';
+import React, { useState } from "react";
+import { postProyecto } from "../../api/proyecto/proyecto.api";
 
 const RegistrarProyecto: React.FC = () => {
-  const [codigoProyecto, setCodPro] = useState('');
-  const [nombreProyecto, setNamePro] = useState('');
-  const [fechaInicio, setInicio] = useState('');
-  const [fechaFinal, setFinal] = useState('');
-  const [estado, setEstado] = useState('');
- 
+  const [nombreProyecto, setNamePro] = useState("");
+  const [fechaInicio, setInicio] = useState("");
+  const [fechaFinal, setFinal] = useState("");
+  const [estado, setEstado] = useState("");
+
   const handleRegistration = async () => {
     try {
-      const response = await registerProyecto({ codigoProyecto, nombreProyecto, fechaInicio, fechaFinal, estado});
+      // Enviar datos del proyecto al servidor
+      const response = await postProyecto({
+        nombreProyecto,
+        fechaInicio,
+        fechaFinal,
+        estado,
+      });
+
       // Manejar la respuesta exitosa, por ejemplo, almacenar el token JWT.
-      console.log('Registro exitoso:', response);
+      console.log("Registro exitoso:", response);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
       // Manejar el error, mostrar un mensaje de error, etc.
-      console.error('Error en el registro:', error);
+      console.error("Error en el registro:", error);
     }
+  };
+
+  const handleEstadoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    // Manejar cambios en el estado del proyecto
+    console.log("Nuevo estado seleccionado:", e.target.value);
+    setEstado(e.target.value);
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full">
-        <div className="text-3xl font-bold mb-4 text-center">Registrar Proyecto</div>
+        <div className="text-3xl font-bold mb-4 text-center">
+          Registrar Proyecto
+        </div>
         <form className="space-y-4">
           <div>
-            <input
-              type="text"
-              placeholder="codigo del Proyecto"
-              value={codigoProyecto}
-              onChange={(e) => setCodPro(e.target.value)}
-              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-400"
-            />
-          </div>
-          <div>
+            {/* Input para el nombre del proyecto */}
             <input
               type="text"
               placeholder="nombre del proyecto"
@@ -43,6 +52,7 @@ const RegistrarProyecto: React.FC = () => {
             />
           </div>
           <div>
+            {/* Input para la fecha de inicio */}
             <input
               type="date"
               value={fechaInicio}
@@ -51,6 +61,7 @@ const RegistrarProyecto: React.FC = () => {
             />
           </div>
           <div>
+            {/* Input para la fecha final */}
             <input
               type="date"
               value={fechaFinal}
@@ -59,15 +70,19 @@ const RegistrarProyecto: React.FC = () => {
             />
           </div>
           <div>
-            <input
-              type="text"
-              placeholder="nombre del proyecto"
+            {/* Select para el estado del proyecto */}
+            <select
               value={estado}
-              onChange={(e) => setEstado(e.target.value)}
+              onChange={handleEstadoChange}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-400"
-            />
+            >
+              <option>Seleccione el estado</option>
+              <option value="activo">Activo</option>
+              <option value="inactivo">Inactivo</option>
+            </select>
           </div>
           <div>
+            {/* Botón para enviar el formulario */}
             <button
               type="button"
               onClick={handleRegistration}

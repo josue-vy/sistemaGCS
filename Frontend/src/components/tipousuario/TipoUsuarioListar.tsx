@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
-import { UserList } from "../types/usuarioService";
-import { getUsers } from "../api/auth.api";
+import { getTipoUsuarios } from "../../api/tipousuario/tipousuario.api";
+import { TipoUserList } from "../../types/tipoUsuariosService";
 
-const UsuariosListar: React.FC = () => {
-  const [usuarios, setUsuarios] = useState<UserList[]>([]);
+const TipoUsuariosListar: React.FC = () => {
+  const [tipoUsuario, setUsuarios] = useState<TipoUserList[]>([]);
 
   useEffect(() => {
     const fetchUsuarios = async () => {
       try {
-        const response = await getUsers();
+        const response = await getTipoUsuarios();
         setUsuarios(response.data);
       } catch (error) {
         console.error("Error al listar usuarios:", error);
@@ -26,20 +26,16 @@ const UsuariosListar: React.FC = () => {
           <table className="min-w-full border-collapse border border-gray-300">
             <thead>
               <tr>
-                <th className="border border-gray-300 p-2">Nombre</th>
-                <th className="border border-gray-300 p-2">Apellido</th>
-                <th className="border border-gray-300 p-2">Correo</th>
+                <th className="border border-gray-300 p-2">Id</th>
                 <th className="border border-gray-300 p-2">Tipo de Usuario</th>
               </tr>
             </thead>
             <tbody>
-              {usuarios.map((usuario) => (
+              {tipoUsuario.map((usuario) => (
                 <tr key={usuario.id}>
-                  <td className="border border-gray-300 p-2">{usuario.nombre}</td>
-                  <td className="border border-gray-300 p-2">{usuario.apellido}</td>
-                  <td className="border border-gray-300 p-2">{usuario.correo}</td>
+                  <td className="border border-gray-300 p-2">{usuario.id}</td>
                   <td className="border border-gray-300 p-2">
-                    {usuario.tipoUsuario ? usuario.tipoUsuario.nombreTipoUsuario : "Sin tipo"}
+                    {usuario.nombreTipoUsuario}
                   </td>
                 </tr>
               ))}
@@ -51,4 +47,4 @@ const UsuariosListar: React.FC = () => {
   );
 };
 
-export default UsuariosListar;
+export default TipoUsuariosListar;

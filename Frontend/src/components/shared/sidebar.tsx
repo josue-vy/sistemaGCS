@@ -25,8 +25,8 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-800 text-white w-1/5 h-screen fixed top-0 left-0 p-4">
-      <div className="text-2xl font-bold mb-4">Mi App</div>
+    <div className="bg-gray-800 text-white w-1/5 h-screen fixed top-0 left-0 p-4 z-10">
+      <div className="text-2xl font-bold mb-4">GCS</div>
       <div className="mb-4">
         <Link to="/dashboard" className="block text-white hover:text-blue-500 mb-2">
           <Menu className="w-5 h-5 inline" /> Dashboard
@@ -37,7 +37,7 @@ const Sidebar: React.FC = () => {
         </div>
         {solicitudOpen && (
           <div className="pl-4">
-            <Link to="/solicitud/agregar" className="block text-white hover:text-blue-500 mb-2">
+            <Link to="/solicitud/registrar" className="block text-white hover:text-blue-500 mb-2">
               <Clipboard className="w-4 h-4 inline mr-1" /> Agregar Solicitud
             </Link>
             <Link to="/solicitud/listar" className="block text-white hover:text-blue-500 mb-2">
@@ -58,6 +58,12 @@ const Sidebar: React.FC = () => {
             </Link>
             <Link to="/usuarios/listar" className="block text-white hover:text-blue-500 mb-2">
               <Briefcase className="w-4 h-4 inline mr-1" /> Listar Usuario
+            </Link>
+            <Link to="/tipousuarios/registrar" className="block text-white hover:text-blue-500 mb-2">
+              <User className="w-4 h-4 inline mr-1" /> Registrar Tipo Usuario
+            </Link>
+            <Link to="/tipousuarios/listar" className="block text-white hover:text-blue-500 mb-2">
+              <Briefcase className="w-4 h-4 inline mr-1" /> Listar Tipo Usuario
             </Link>
           </div>
         )}
