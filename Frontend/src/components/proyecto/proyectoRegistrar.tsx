@@ -1,30 +1,67 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { postProyecto } from "../../api/proyecto/proyecto.api";
+import { useNavigate } from "react-router";
+import { getMetodologia } from "../../api/metodologia/metodologia.api";
+import { ProyectoCreate } from "../../types/proyectoService";
 
 const RegistrarProyecto: React.FC = () => {
   const [nombreProyecto, setNamePro] = useState("");
   const [fechaInicio, setInicio] = useState("");
   const [fechaFinal, setFinal] = useState("");
   const [estado, setEstado] = useState("");
+  const [selectedMetodologia, setSelectedMetodologia] = useState<{
+    metodologia: string;
+    nombreMetodologia: string;
+  }>({
+    metodologia: "",
+    nombreMetodologia: "",
+  });
+
+  const [metodologias, setMetologia] = useState<ProyectoCreate[]>([]);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [registrationError, setRegistrationError] = useState<string | null>(
+    null
+  );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchMetodologia = async () => {
+      try {
+        const response = await getMetodologia();
+        setMetologia(response.data);
+      } catch (error) {
+        console.error("Error al obtener Metodologia:", error);
+      }
+    };
+    fetchMetodologia();
+  }, []);
 
   const handleRegistration = async () => {
     try {
-      // Enviar datos del proyecto al servidor
-      const response = await postProyecto({
+      const newProyecto: ProyectoCreate = {
         nombreProyecto,
         fechaInicio,
         fechaFinal,
         estado,
-      });
+        metodologia: selectedMetodologia.metodologia,
+        nombreMetodologia: selectedMetodologia.nombreMetodologia,
+      };
 
-      // Manejar la respuesta exitosa, por ejemplo, almacenar el token JWT.
-      console.log("Registro exitoso:", response);
+      const response = await postProyecto(newProyecto);
+      console.log("Registro exitoso:", response.data);
+
+      setRegistrationSuccess(true);
+      setRegistrationError(null);
+
       setTimeout(() => {
         window.location.reload();
       }, 2000);
     } catch (error) {
-      // Manejar el error, mostrar un mensaje de error, etc.
+      // Manejar errores
       console.error("Error en el registro:", error);
+      setRegistrationSuccess(false);
+      setRegistrationError("Error en el registro. Inténtalo de nuevo.");
     }
   };
 
@@ -81,6 +118,34 @@ const RegistrarProyecto: React.FC = () => {
               <option value="inactivo">Inactivo</option>
             </select>
           </div>
+          <select
+            value={selectedMetodologia.metodologia}
+            onChange={(e) =>
+              setSelectedMetodologia({
+                ...selectedMetodologia,
+                metodologia: e.target.value,
+              })
+            }
+            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-400"
+          >
+            <option key="default" value="">
+              Seleccionar Metodologia
+            </option>
+            {/* Filtrar tipos de usuario existentes */}
+            {metodologias
+              .filter(
+                (metodologia, index, self) =>
+                  index ===
+                  self.findIndex(
+                    (t) => t.nombreMetodologia === metodologia.nombreMetodologia
+                  )
+              )
+              .map((metodologia) => (
+                <option key={metodologia.id} value={metodologia.metodologia}>
+                  {metodologia.nombreMetodologia}
+                </option>
+              ))}
+          </select>
           <div>
             {/* Botón para enviar el formulario */}
             <button
@@ -91,10 +156,21 @@ const RegistrarProyecto: React.FC = () => {
               Guardar
             </button>
           </div>
+          {/* Mostrar mensaje de éxito después del registro */}
+          {registrationSuccess && (
+            <div className="text-green-500 text-center">
+              Usuario registrado. La página se actualizará en breve.
+            </div>
+          )}
+          {/* Mostrar mensaje de error después del registro */}
+          {registrationError && (
+            <div className="text-red-500 text-center">
+              Error en el registro. Inténtalo de nuevo.
+            </div>
+          )}
         </form>
       </div>
     </div>
   );
 };
-
 export default RegistrarProyecto;

@@ -9,14 +9,14 @@ import UsuariosListar from "../components/UsuariosListar";
 import ProyectoRegistrar from "../components/proyecto/proyectoRegistrar";
 import ProyectoListar from "../components/proyecto/proyectoListar";
 import MetodologiaRegistrar from "../components/metodologia/MetodologiaRegistrar";
-// import MetodologiaListar from '../components/MetodologiaListar';
 import RegistrarFases from "../components/metodologia/fases/FasesRegistrar";
 import TipoUsuarioRegistrar from "../components/tipousuario/TipoUsuarioRegistrar";
 import TipoUsuariosListar from "../components/tipousuario/TipoUsuarioListar";
 import SolicitudRegister from "../components/solicitudCambio/SolicitudRegister";
 import SolicitudCambiosListar from "../components/solicitudCambio/SolicitudListar";
 import RespuestaSolicitudCambio from "../components/solicitudCambio/solicitudRespuesta/SolicitudRespuesta";
-// import MetodologiaListarFases from '../components/MetodologiaListarFases';
+import FaseListar from "../components/metodologia/fases/FasesListar";
+import MetodologiaListar from "../components/metodologia/MetodologiaListar";
 
 const AppRouter: React.FC = () => {
   return (
@@ -123,11 +123,29 @@ const AppRouter: React.FC = () => {
         }
       />
       <Route
+        path="/metodologia/listar"
+        element={
+          <Layout>
+            <Sidebar />
+            <MetodologiaListar />
+          </Layout>
+        }
+      />
+      <Route
         path="/metodologia/registrar-fases"
         element={
           <Layout>
             <Sidebar />
             <RegistrarFases />
+          </Layout>
+        }
+      />
+      <Route
+        path="metodologia/listar-fases"
+        element={
+          <Layout>
+            <Sidebar />
+            <FaseListar />
           </Layout>
         }
       />

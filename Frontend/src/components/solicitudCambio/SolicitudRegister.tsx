@@ -15,6 +15,12 @@ const SolicitudForm = () => {
     descripcion: '',
   });
 
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [registrationError, setRegistrationError] = useState<string | null>(
+    null
+  );
+
+
   const handleSolicitudSubmission = async () => {
     try {
       // Convertir la fecha a un objeto Date
@@ -48,9 +54,16 @@ const SolicitudForm = () => {
       });
 
       console.log("Solicitud de cambio registrada:", response.data);
-      // Realizar acciones adicionales después de registrar la solicitud
+      setRegistrationSuccess(true);
+      setRegistrationError(null);
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     } catch (error) {
-      console.error("Error al registrar solicitud de cambio:", error);
+      // Manejar errores
+      console.error("Error en el registro:", error);
+      setRegistrationSuccess(false);
+      setRegistrationError("Error en el registro. Inténtalo de nuevo.");
     }
   };
 
@@ -124,6 +137,20 @@ const SolicitudForm = () => {
       >
         Registrar
       </button>
+
+      {/* Mostrar mensaje de éxito después del registro */}
+      {registrationSuccess && (
+        <div className="text-green-500 text-center">
+          Usuario registrado. La página se actualizará en breve.
+        </div>
+      )}
+
+      {/* Mostrar mensaje de error después del registro */}
+      {registrationError && (
+        <div className="text-red-500 text-center">
+          {registrationError}
+        </div>
+      )}
     </div>
   );
 };

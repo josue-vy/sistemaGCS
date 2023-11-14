@@ -4,7 +4,6 @@ export type TipoUserRegister = {
 };
 
 export type TipoUserList = {
-    id?: number;
-    nombreTipoUsuario: string;
-  };
-  
+  id?: number;
+  nombreTipoUsuario: string;
+};

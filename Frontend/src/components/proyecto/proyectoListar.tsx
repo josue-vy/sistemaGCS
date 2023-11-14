@@ -3,16 +3,19 @@ import { ProyectoList } from '../../types/proyectoService';
 import { getProyecto } from '../../api/proyecto/proyecto.api';
 
 const ProyectoListar: React.FC = () => {
-    const [proyectos, setUsers] = useState<ProyectoList[]>([]); // Especifica que users es un array de tipo User
+    const [proyectos, setProyectos] = useState<ProyectoList[]>([]); // Especifica que users es un array de tipo User
 
     useEffect(() => {
-        getProyecto()
-            .then((response) => {
-                setUsers(response.data as ProyectoList[]); // Convierte la respuesta en un array de tipo User
-            })
-            .catch((error) => {
-                console.error('Error al listar usuarios:', error);
-            });
+      const fetchProyectos = async () => {
+        try {
+          const response = await getProyecto();
+          setProyectos(response.data);
+        } catch (error) {
+          console.error("Error al listar usuarios:", error);
+        }
+      };
+  
+      fetchProyectos();
     }, []);
 
     return (
@@ -28,16 +31,18 @@ const ProyectoListar: React.FC = () => {
                     <th className="border border-gray-300 p-2">Fecha Inicio</th>
                     <th className="border border-gray-300 p-2">Fecha Final</th>
                     <th className="border border-gray-300 p-2">Estado</th>
+                    <th className="border border-gray-300 p-2">Metodologia</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {proyectos.map((usuario) => (
-                    <tr key={usuario.id}>
-                      <td className="border border-gray-300 p-2">{usuario.id}</td>
-                      <td className="border border-gray-300 p-2">{usuario.nombreProyecto}</td>
-                      <td className="border border-gray-300 p-2">{usuario.fechaInicio}</td>
-                      <td className="border border-gray-300 p-2">{usuario.fechaFinal}</td>
-                      <td className="border border-gray-300 p-2">{usuario.estado}</td>
+                  {proyectos.map((proyecto) => (
+                    <tr key={proyecto.id}>
+                      <td className="border border-gray-300 p-2">{proyecto.id}</td>
+                      <td className="border border-gray-300 p-2">{proyecto.nombreProyecto}</td>
+                      <td className="border border-gray-300 p-2">{proyecto.fechaInicio}</td>
+                      <td className="border border-gray-300 p-2">{proyecto.fechaFinal}</td>
+                      <td className="border border-gray-300 p-2">{proyecto.estado}</td>
+                      <td className="border border-gray-300 p-2">{proyecto.metodologia ? proyecto.metodologia.nombreMetodologia : "Sin tipo"}</td>
 
                     </tr>
                   ))}
