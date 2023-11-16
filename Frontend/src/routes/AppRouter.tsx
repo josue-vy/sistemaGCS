@@ -17,6 +17,7 @@ import SolicitudCambiosListar from "../components/solicitudCambio/SolicitudLista
 import RespuestaSolicitudCambio from "../components/solicitudCambio/solicitudRespuesta/SolicitudRespuesta";
 import FaseListar from "../components/metodologia/fases/FasesListar";
 import MetodologiaListar from "../components/metodologia/MetodologiaListar";
+import RegistrarMiembroProyecto from "../components/miembroProyecto/miembroProyectoRegistrar";
 
 const AppRouter: React.FC = () => {
   return (
@@ -149,6 +150,24 @@ const AppRouter: React.FC = () => {
           </Layout>
         }
       />
+            <Route
+        path="miembroProyecto/registrar"
+        element={
+          <Layout>
+            <Sidebar />
+            <RegistrarMiembroProyecto />
+          </Layout>
+        }
+      />
+            {/* <Route
+        path="miembroProyecto/registrar"
+        element={
+          <Layout>
+            <Sidebar />
+            <FaseListar />
+          </Layout>
+        }
+      /> */}
     </Routes>
   );
 };

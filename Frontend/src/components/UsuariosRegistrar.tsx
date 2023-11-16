@@ -149,13 +149,11 @@ const Registration: React.FC = () => {
               Registrarse
             </button>
           </div>
-          {/* Mostrar mensaje de éxito después del registro */}
           {registrationSuccess && (
             <div className="text-green-500 text-center">
               Usuario registrado. La página se actualizará en breve.
             </div>
           )}
-          {/* Mostrar mensaje de error después del registro */}
           {registrationError && (
             <div className="text-red-500 text-center">
               Error en el registro. Inténtalo de nuevo.

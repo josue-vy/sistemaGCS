@@ -7,6 +7,7 @@ const Sidebar: React.FC = () => {
   const [usuariosOpen, setUsuariosOpen] = useState(false);
   const [proyectosOpen, setProyectosOpen] = useState(false);
   const [metodologiaOpen, setMetodologiaOpen] = useState(false);
+  const [miembroProyectoOpen, setMiembroProyectoOpen] = useState(false);
 
   const toggleSolicitud = () => {
     setSolicitudOpen(!solicitudOpen);
@@ -22,6 +23,9 @@ const Sidebar: React.FC = () => {
 
   const toggleMetodologia = () => {
     setMetodologiaOpen(!metodologiaOpen);
+  };
+  const toggleMiembroProyecto = () => {
+    setMiembroProyectoOpen(!miembroProyectoOpen);
   };
 
   return (
@@ -104,6 +108,28 @@ const Sidebar: React.FC = () => {
               <BarChart2 className="w-4 h-4 inline mr-1" /> Listar Fases
             </Link>
           </div>
+        )}
+      </div>
+      <div className="mb-4">
+        <div className="cursor-pointer" onClick={toggleMiembroProyecto}>
+          <Layers className="w-5 h-5 inline" /> Designar Proyecto
+          <ChevronDown className="w-4 h-4 inline ml-1" />
+        </div>
+        {miembroProyectoOpen && (
+          <div className="pl-4">
+            <Link to="/miembroProyecto/registrar" className="block text-white hover:text-blue-500 mb-2">
+              <FileText className="w-4 h-4 inline mr-1" /> Designar Proyecto a Usuario
+            </Link>
+            <Link to="/miembroProyecto/listar" className="block text-white hover:text-blue-500 mb-2">
+              <Layers className="w-4 h-4 inline mr-1" /> Listar Proyectos
+            </Link>
+            {/* <Link to="/metodologia/registrar-fases" className="block text-white hover:text-blue-500 mb-2">
+              <Calendar className="w-4 h-4 inline mr-1" /> Registrar Fases
+            </Link>
+            <Link to="/metodologia/listar-fases" className="block text-white hover:text-blue-500 mb-2">
+              <BarChart2 className="w-4 h-4 inline mr-1" /> Listar Fases
+            </Link> */}
+          </div>  
         )}
       </div>
     </div>
