@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { MiembroElementoRegister } from "../../../types/miembroElementoService";
 import { useNavigate } from "react-router";
 import { getElementoConfi } from "../../../api/elementosConfiguracion/elementoConfiguracion.api";
-import { getUsers } from "../../../api/auth.api";
+import { getUsers } from "../../../api/usuario/auth.api";
 import { postMiembroElemento } from "../../../api/miembroElemento/miembroElemento.api";
+import AlertMessage from "../../../pages/AlertMessage";
 
 const RegistrarMiembroElemento: React.FC = () => {
   const [selectedUsuario, setSelectedUsuario] = useState<{
@@ -22,7 +23,7 @@ const RegistrarMiembroElemento: React.FC = () => {
   });
   const [url, setUrl] = useState<string>("");
   const [fechaInicio, setFechaInicio] = useState<string>("");
-  const [fechaFinal, setFechaFinal] = useState<string>("");
+  const [fechaFin, setFechaFinal] = useState<string>("");
 
   const [usuarios, setUsuarios] = useState<MiembroElementoRegister[]>([]);
   const [elementos, setElementos] = useState<MiembroElementoRegister[]>([]);
@@ -82,7 +83,7 @@ const RegistrarMiembroElemento: React.FC = () => {
         nomenclaturaElemento: selectedElementoConfi.nomenclaturaElemento,
         url,
         fechaInicio,
-        fechaFinal,
+        fechaFin,
       };
 
       const response = await postMiembroElemento(newMiembroElemento);
@@ -163,7 +164,7 @@ const RegistrarMiembroElemento: React.FC = () => {
           />
           <input
             type="datetime-local"
-            value={fechaFinal}
+            value={fechaFin}
             onChange={(e) => setFechaFinal(e.target.value)}
             className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-400"
           />
@@ -177,14 +178,17 @@ const RegistrarMiembroElemento: React.FC = () => {
             </button>
           </div>
           {registrationSuccess && (
-            <div className="text-green-500 text-center">
-              Usuario registrado. La página se actualizará en breve.
-            </div>
+            <AlertMessage
+              type="success"
+              message="miembro elemento registrado. La página se actualizará en breve."
+            />
           )}
+
           {registrationError && (
-            <div className="text-red-500 text-center">
-              Error en el registro. Inténtalo de nuevo.
-            </div>
+            <AlertMessage
+              type="error"
+              message="Error en el registro. Inténtalo de nuevo."
+            />
           )}
         </form>
       </div>

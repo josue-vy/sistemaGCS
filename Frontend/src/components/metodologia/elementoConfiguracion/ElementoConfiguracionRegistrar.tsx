@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { ElementoConfiCreate } from "../../../types/elementoConfiguracionService";
 import { getFase } from "../../../api/fase/fase.api";
 import { postElementoConfi } from "../../../api/elementosConfiguracion/elementoConfiguracion.api";
+import AlertMessage from "../../../pages/AlertMessage";
 
 
 const RegistrarElementoConfiguracion: React.FC = () => {
@@ -119,22 +120,24 @@ const RegistrarElementoConfiguracion: React.FC = () => {
               onClick={handleRegistration}
               className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none"
             >
-              Guardar
+              Registrar
             </button>
           </div>
         </form>
         {/* Mostrar mensaje de éxito después del registro */}
         {registrationSuccess && (
-          <div className="text-green-500 text-center">
-            Usuario registrado. La página se actualizará en breve.
-          </div>
-        )}
-        {/* Mostrar mensaje de error después del registro */}
-        {registrationError && (
-          <div className="text-red-500 text-center">
-            Error en el registro. Inténtalo de nuevo.
-          </div>
-        )}
+            <AlertMessage
+              type="success"
+              message="elemento registrado. La página se actualizará en breve."
+            />
+          )}
+
+          {registrationError && (
+            <AlertMessage
+              type="error"
+              message="Error en el registro. Inténtalo de nuevo."
+            />
+          )}
       </div>
     </div>
   );

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { registerUser } from "../api/auth.api";
-import { UserRegister } from "../types/usuarioService";
+import { registerUser } from "../../api/usuario/auth.api";
+import { UserRegister } from "../../types/usuarioService";
 import { useNavigate } from "react-router-dom";
-import { getTipoUsuarios } from "../api/tipousuario/tipousuario.api";
+import { getTipoUsuarios } from "../../api/tipousuario/tipousuario.api";
+import AlertMessage from "../../pages/AlertMessage";
 
 const Registration: React.FC = () => {
   const [nombre, setUsername] = useState("");
@@ -97,6 +98,7 @@ const Registration: React.FC = () => {
           <div>
             <input
               type="email"
+              required
               placeholder="Correo electrónico"
               value={correo}
               onChange={(e) => setEmail(e.target.value)}
@@ -150,14 +152,17 @@ const Registration: React.FC = () => {
             </button>
           </div>
           {registrationSuccess && (
-            <div className="text-green-500 text-center">
-              Usuario registrado. La página se actualizará en breve.
-            </div>
+            <AlertMessage
+              type="success"
+              message="Usuario registrado. La página se actualizará en breve."
+            />
           )}
+
           {registrationError && (
-            <div className="text-red-500 text-center">
-              Error en el registro. Inténtalo de nuevo.
-            </div>
+            <AlertMessage
+              type="error"
+              message="Error en el registro. Inténtalo de nuevo."
+            />
           )}
         </form>
       </div>

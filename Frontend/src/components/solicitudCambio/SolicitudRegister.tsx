@@ -1,25 +1,25 @@
 import { useState } from "react";
 import { postSolicitudCambios } from "../../api/solicitudCambio/solicitudCambio.api";
 import { SolicitudCreate } from "../../types/solicitudCambioService";
+import AlertMessage from "../../pages/AlertMessage";
 
 const SolicitudForm = () => {
   const today = new Date();
-  const defaultDate = today.toISOString().split('T')[0];
+  const defaultDate = today.toISOString().split("T")[0];
 
   const [formData, setFormData] = useState({
     fecha: defaultDate,
-    objetivo: '',
-    url: '',
-    urlCompartido: '',
+    objetivo: "",
+    url: "",
+    urlCompartido: "",
     archivo: null as File | null, // Asegura que archivo puede ser File o null
-    descripcion: '',
+    descripcion: "",
   });
 
   const [registrationSuccess, setRegistrationSuccess] = useState(false);
   const [registrationError, setRegistrationError] = useState<string | null>(
     null
   );
-
 
   const handleSolicitudSubmission = async () => {
     try {
@@ -104,7 +104,9 @@ const SolicitudForm = () => {
         <input
           type="text"
           value={formData.urlCompartido}
-          onChange={(e) => setFormData({ ...formData, urlCompartido: e.target.value })}
+          onChange={(e) =>
+            setFormData({ ...formData, urlCompartido: e.target.value })
+          }
           className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-400"
         />
       </div>
@@ -140,16 +142,17 @@ const SolicitudForm = () => {
 
       {/* Mostrar mensaje de éxito después del registro */}
       {registrationSuccess && (
-        <div className="text-green-500 text-center">
-          Usuario registrado. La página se actualizará en breve.
-        </div>
+        <AlertMessage
+          type="success"
+          message="Solicitud registrado. La página se actualizará en breve."
+        />
       )}
 
-      {/* Mostrar mensaje de error después del registro */}
       {registrationError && (
-        <div className="text-red-500 text-center">
-          {registrationError}
-        </div>
+        <AlertMessage
+          type="error"
+          message="Error en el registro. Inténtalo de nuevo."
+        />
       )}
     </div>
   );

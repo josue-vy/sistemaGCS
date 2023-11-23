@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MetodologiaRegister } from "../../types/metodologiaService";
 import { postMetodologia } from "../../api/metodologia/metodologia.api";
+import AlertMessage from "../../pages/AlertMessage";
 
 
 const MetodologiaRegistrar: React.FC = () => {
@@ -64,14 +65,17 @@ const MetodologiaRegistrar: React.FC = () => {
             </button>
           </div>
           {registrationSuccess && (
-            <div className="text-green-500 text-center">
-              Usuario registrado. La página se actualizará en breve.
-            </div>
+            <AlertMessage
+              type="success"
+              message="metodologia registrado. La página se actualizará en breve."
+            />
           )}
+
           {registrationError && (
-            <div className="text-red-500 text-center">
-              Error en el registro. Inténtalo de nuevo.
-            </div>
+            <AlertMessage
+              type="error"
+              message="Error en el registro. Inténtalo de nuevo."
+            />
           )}
         </form>
       </div>

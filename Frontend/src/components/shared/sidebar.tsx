@@ -1,6 +1,16 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ChevronDown, Clipboard, Layers, User,Menu, Briefcase, FileText, Calendar, BarChart2 } from 'react-feather'; // Importa los iconos
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  ChevronDown,
+  Clipboard,
+  Layers,
+  User,
+  Menu,
+  Briefcase,
+  FileText,
+  Calendar,
+  BarChart2,
+} from "react-feather"; // Importa los iconos
 
 const Sidebar: React.FC = () => {
   const [solicitudOpen, setSolicitudOpen] = useState(false);
@@ -29,11 +39,15 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-800 text-white w-1/5 h-screen fixed top-0 left-0 p-4 z-10">
-      <div className="text-2xl font-bold mb-4">GCS</div>
-      <div className="mb-4">
-        <Link to="/dashboard" className="block text-white hover:text-blue-500 mb-2">
-          <Menu className="w-5 h-5 inline" /> Dashboard
+    <div className="bg-gray-900 text-white w-1/5 h-screen fixed top-0 left-0 p-4 z-10">
+      <div className="text-3xl font-bold mb-6 text-blue-400">GCS Dashboard</div>
+
+      <div className="mb-6">
+        <Link
+          to="/dashboard"
+          className=" text-white hover:text-blue-500 mb-2 flex items-center"
+        >
+          <Menu className="w-5 h-5 mr-2" /> Dashboard
         </Link>
         <div className="cursor-pointer" onClick={toggleSolicitud}>
           <FileText className="w-5 h-5 inline " /> Solicitud Cambio
@@ -41,10 +55,16 @@ const Sidebar: React.FC = () => {
         </div>
         {solicitudOpen && (
           <div className="pl-4">
-            <Link to="/solicitud/registrar" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/solicitud/registrar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <Clipboard className="w-4 h-4 inline mr-1" /> Agregar Solicitud
             </Link>
-            <Link to="/solicitud/listar" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/solicitud/listar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <Layers className="w-4 h-4 inline mr-1" /> Listar Solicitud
             </Link>
           </div>
@@ -57,16 +77,28 @@ const Sidebar: React.FC = () => {
         </div>
         {usuariosOpen && (
           <div className="pl-4">
-            <Link to="/usuarios/registrar" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/usuarios/registrar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <User className="w-4 h-4 inline mr-1" /> Registrar Usuario
             </Link>
-            <Link to="/usuarios/listar" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/usuarios/listar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <Briefcase className="w-4 h-4 inline mr-1" /> Listar Usuario
             </Link>
-            <Link to="/tipousuarios/registrar" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/tipousuarios/registrar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <User className="w-4 h-4 inline mr-1" /> Registrar Tipo Usuario
             </Link>
-            <Link to="/tipousuarios/listar" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/tipousuarios/listar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <Briefcase className="w-4 h-4 inline mr-1" /> Listar Tipo Usuario
             </Link>
           </div>
@@ -79,16 +111,29 @@ const Sidebar: React.FC = () => {
         </div>
         {proyectosOpen && (
           <div className="pl-4">
-            <Link to="/proyecto/registrar" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/proyecto/registrar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <FileText className="w-4 h-4 inline mr-1" /> Registrar Proyecto
             </Link>
-            <Link to="/proyecto/listar" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/proyecto/listar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <Clipboard className="w-4 h-4 inline mr-1" /> Listar Proyecto
             </Link>
-            <Link to="/proyecto/rol-registrar" className="block text-white hover:text-blue-500 mb-2">
-              <FileText className="w-4 h-4 inline mr-1" /> Registrar Rol Proyecto
+            <Link
+              to="/proyecto/rol-registrar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
+              <FileText className="w-4 h-4 inline mr-1" /> Registrar Rol
+              Proyecto
             </Link>
-            <Link to="/proyecto/rol-listar" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/proyecto/rol-listar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <Clipboard className="w-4 h-4 inline mr-1" /> Listar Rol Proyecto
             </Link>
           </div>
@@ -101,22 +146,40 @@ const Sidebar: React.FC = () => {
         </div>
         {metodologiaOpen && (
           <div className="pl-4">
-            <Link to="/metodologia/registrar" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/metodologia/registrar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <FileText className="w-4 h-4 inline mr-1" /> Registrar Metodologia
             </Link>
-            <Link to="/metodologia/listar" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/metodologia/listar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <Layers className="w-4 h-4 inline mr-1" /> Listar Metodologia
             </Link>
-            <Link to="/metodologia/registrar-fases" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/metodologia/registrar-fases"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <Calendar className="w-4 h-4 inline mr-1" /> Registrar Fases
             </Link>
-            <Link to="/metodologia/listar-fases" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/metodologia/listar-fases"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <BarChart2 className="w-4 h-4 inline mr-1" /> Listar Fases
             </Link>
-            <Link to="/metodologia/registrar-elementosc" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/metodologia/registrar-elementosc"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <Calendar className="w-4 h-4 inline mr-1" /> Registrar ElementosC
             </Link>
-            <Link to="/metodologia/listar-elementosc" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/metodologia/listar-elementosc"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <BarChart2 className="w-4 h-4 inline mr-1" /> Listar ElementosC
             </Link>
           </div>
@@ -129,19 +192,33 @@ const Sidebar: React.FC = () => {
         </div>
         {miembroProyectoOpen && (
           <div className="pl-4">
-            <Link to="/miembroProyecto/registrar" className="block text-white hover:text-blue-500 mb-2">
-              <FileText className="w-4 h-4 inline mr-1" /> Designar Proyecto a Usuario
+            <Link
+              to="/miembroProyecto/registrar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
+              <FileText className="w-4 h-4 inline mr-1" /> Designar Proyecto a
+              Usuario
             </Link>
-            <Link to="/miembroProyecto/listar" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/miembroProyecto/listar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <Layers className="w-4 h-4 inline mr-1" /> Listar Proyectos
             </Link>
-            <Link to="/miembroElemento/registrar" className="block text-white hover:text-blue-500 mb-2">
-              <FileText className="w-4 h-4 inline mr-1" /> Designar Elemento a Usuario
+            <Link
+              to="/miembroElemento/registrar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
+              <FileText className="w-4 h-4 inline mr-1" /> Designar Elemento a
+              Usuario
             </Link>
-            <Link to="/miembroElemento/listar" className="block text-white hover:text-blue-500 mb-2">
+            <Link
+              to="/miembroElemento/listar"
+              className="block text-white hover:text-blue-500 mb-2"
+            >
               <Layers className="w-4 h-4 inline mr-1" /> Listar Elementos
             </Link>
-          </div>  
+          </div>
         )}
       </div>
     </div>

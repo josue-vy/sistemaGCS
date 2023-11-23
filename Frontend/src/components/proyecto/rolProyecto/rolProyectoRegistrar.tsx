@@ -1,6 +1,7 @@
 import { RolProyectoRegister } from "../../../types/rolProyectoService";
 import { postProyectoRol } from "../../../api/rolProyecto/rolProyecto.api";
 import { useState } from "react";
+import AlertMessage from "../../../pages/AlertMessage";
 
 const RolProyectoRegistrar: React.FC = () => {
   const [nombreRolProyecto, setNombreRolProyecto] = useState('');
@@ -53,18 +54,21 @@ const RolProyectoRegistrar: React.FC = () => {
               onClick={handleRolProyectoRegistration}
               className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none"
             >
-              Guardar
+              Registrar
             </button>
           </div>
           {registrationSuccess && (
-            <div className="text-green-500 text-center">
-              Rol de proyecto registrado. La página se actualizará en breve.
-            </div>
+            <AlertMessage
+              type="success"
+              message="rol proyecto registrado. La página se actualizará en breve."
+            />
           )}
+
           {registrationError && (
-            <div className="text-red-500 text-center">
-              Error en el registro. Inténtalo de nuevo.
-            </div>
+            <AlertMessage
+              type="error"
+              message="Error en el registro. Inténtalo de nuevo."
+            />
           )}
         </form>
       </div>

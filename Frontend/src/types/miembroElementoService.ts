@@ -6,7 +6,7 @@ export type MiembroElementoRegister = {
   nomenclaturaElemento: string;
   url: string;
   fechaInicio: string;
-  fechaFinal: string;
+  fechaFin: string;
 };
 
 export type MiembroElementoList = {
@@ -20,7 +20,7 @@ export type MiembroElementoList = {
     url: string;
     fechaInicio: string;
     fechaFin: string;
-    nombreUsuario?: string; // Nuevo campo para el nombre de usuario
-    nomenclaturaElemento?: string; // Nuevo campo para la nomenclatura del elemento
-    // Otros campos que necesites en la lista
+    nombreUsuario?: string; 
+    nomenclaturaElemento?: string; 
+
   };

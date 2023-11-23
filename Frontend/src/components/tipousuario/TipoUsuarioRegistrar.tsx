@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 import { postTipoUsuarios } from '../../api/tipousuario/tipousuario.api';
 import { TipoUserRegister } from '../../types/tipoUsuariosService';
+import AlertMessage from '../../pages/AlertMessage';
 
 const TipoUsuarioRegistrar: React.FC = () => {
   const [nombreTipoUsuario, setNombreTipoUsuario] = useState('');
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [registrationError, setRegistrationError] = useState<string | null>(
+    null
+  );
 
   const handleTipoUsuarioRegistration = async () => {
     try {
@@ -18,6 +23,8 @@ const TipoUsuarioRegistrar: React.FC = () => {
       setNombreTipoUsuario('');
 
       console.log('Tipo de usuario registrado:', response.data);
+      setRegistrationSuccess(true);
+      setRegistrationError(null);
       setTimeout(() => {
         window.location.reload();
       }, 2000);
@@ -44,7 +51,21 @@ const TipoUsuarioRegistrar: React.FC = () => {
       >
         Registrar
       </button>
+      {registrationSuccess && (
+            <AlertMessage
+              type="success"
+              message="Usuario registrado. La página se actualizará en breve."
+            />
+          )}
+
+          {registrationError && (
+            <AlertMessage
+              type="error"
+              message="Error en el registro. Inténtalo de nuevo."
+            />
+          )}
     </div>
+    
   );
 };
 

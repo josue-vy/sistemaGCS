@@ -1,5 +1,5 @@
   import axios from 'axios';
-import { UserRegister } from '../types/usuarioService';
+import { UserRegister } from '../../types/usuarioService';
 
   // URL base de tu servidor API
   const baseUrl = 'http://localhost:3000'; // Asegúrate de que esta URL sea la correcta para tu servidor

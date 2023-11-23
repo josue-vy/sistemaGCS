@@ -29,37 +29,35 @@ const SolicitudCambiosListar: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="w-full max-w-2xl">
-        <h2 className="text-2xl font-bold mb-4">Listado de Solicitudes de Cambio</h2>
+    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-3xl p-6">
+        <h2 className="text-3xl font-bold mb-6 text-center">Listado de Solicitudes de Cambio</h2>
         <div className="overflow-x-auto">
-          <table className="min-w-full border-collapse border border-gray-300">
-            {/* Encabezado de la tabla */}
-            <thead>
+          <table className="min-w-full bg-white shadow-md rounded">
+            <thead className="bg-gray-200 text-gray-700">
               <tr>
-                <th className="border border-gray-300 p-2">Id</th>
-                <th className="border border-gray-300 p-2">Objetivo</th>
-                <th className="border border-gray-300 p-2">Descripción</th>
-                <th className="border border-gray-300 p-2 w-1/4">Acciones</th>
+                <th className="py-3 px-4 border-b border-gray-300">Id</th>
+                <th className="py-3 px-4 border-b border-gray-300">Objetivo</th>
+                <th className="py-3 px-4 border-b border-gray-300">Descripción</th>
+                <th className="py-3 px-4 border-b border-gray-300 w-1/4">Acciones</th>
               </tr>
             </thead>
-            {/* Cuerpo de la tabla */}
             <tbody>
               {solicitudList.map((solicitud) => (
-                <tr key={solicitud.id}>
-                  <td className="border border-gray-300 p-2">{solicitud.id}</td>
-                  <td className="border border-gray-300 p-2">{solicitud.objetivo}</td>
-                  <td className="border border-gray-300 p-2">{solicitud.descripcion}</td>
-                  <td className="border border-gray-300 p-2 w-1/4">
+                <tr key={solicitud.id} className="hover:bg-gray-50">
+                  <td className="py-4 px-6 border-b border-gray-300">{solicitud.id}</td>
+                  <td className="py-4 px-6 border-b border-gray-300">{solicitud.objetivo}</td>
+                  <td className="py-4 px-6 border-b border-gray-300">{solicitud.descripcion}</td>
+                  <td className="py-4 px-6 border-b border-gray-300 w-1/4">
                     <button
-                      className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-700"
+                      className="bg-blue-500 text-white py-2 px-4 rounded mr-2 hover:bg-blue-700"
                       onClick={() => redirectToUrl(solicitud.urlCompartido)}
                     >
-                      Ver Url
+                      Ver URL
                     </button>
                     <button
-                      className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-blue-700"
-                      onClick={ handleDirectToR}
+                      className="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-700"
+                      onClick={handleDirectToR}
                     >
                       Responder
                     </button>

@@ -4,10 +4,11 @@ import {
   postMiembroPro,
   getMiembroPro,
 } from "../../api/miembroProyecto/miembroProyecto.api";
-import { getUsers } from "../../api/auth.api";
+import { getUsers } from "../../api/usuario/auth.api";
 import { getProyecto } from "../../api/proyecto/proyecto.api";
 import { getProyectoRol } from "../../api/rolProyecto/rolProyecto.api";
 import { useNavigate } from "react-router";
+import AlertMessage from "../../pages/AlertMessage";
 
 const RegistrarMiembroProyecto: React.FC = () => {
   const [selectedUsuario, setSelectedUsuario] = useState<{
@@ -211,14 +212,17 @@ const RegistrarMiembroProyecto: React.FC = () => {
             </button>
           </div>
           {registrationSuccess && (
-            <div className="text-green-500 text-center">
-              Usuario registrado. La página se actualizará en breve.
-            </div>
+            <AlertMessage
+              type="success"
+              message="miembro proyecto registrado. La página se actualizará en breve."
+            />
           )}
+
           {registrationError && (
-            <div className="text-red-500 text-center">
-              Error en el registro. Inténtalo de nuevo.
-            </div>
+            <AlertMessage
+              type="error"
+              message="Error en el registro. Inténtalo de nuevo."
+            />
           )}
         </form>
       </div>

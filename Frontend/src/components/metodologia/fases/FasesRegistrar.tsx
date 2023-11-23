@@ -3,6 +3,7 @@ import { FaseCreate } from "../../../types/faseService";
 import { useNavigate } from "react-router";
 import { postFase } from "../../../api/fase/fase.api";
 import { getMetodologia } from "../../../api/metodologia/metodologia.api";
+import AlertMessage from "../../../pages/AlertMessage";
 
 const RegistrarFases: React.FC = () => {
   const [nombreFase, setNameFase] = useState("");
@@ -113,16 +114,18 @@ const RegistrarFases: React.FC = () => {
         </form>
         {/* Mostrar mensaje de éxito después del registro */}
         {registrationSuccess && (
-          <div className="text-green-500 text-center">
-            Usuario registrado. La página se actualizará en breve.
-          </div>
-        )}
-        {/* Mostrar mensaje de error después del registro */}
-        {registrationError && (
-          <div className="text-red-500 text-center">
-            Error en el registro. Inténtalo de nuevo.
-          </div>
-        )}
+            <AlertMessage
+              type="success"
+              message="Fase registrado. La página se actualizará en breve."
+            />
+          )}
+
+          {registrationError && (
+            <AlertMessage
+              type="error"
+              message="Error en el registro. Inténtalo de nuevo."
+            />
+          )}
       </div>
     </div>
   );
