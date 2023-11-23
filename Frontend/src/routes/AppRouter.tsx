@@ -18,6 +18,11 @@ import RespuestaSolicitudCambio from "../components/solicitudCambio/solicitudRes
 import FaseListar from "../components/metodologia/fases/FasesListar";
 import MetodologiaListar from "../components/metodologia/MetodologiaListar";
 import RegistrarMiembroProyecto from "../components/miembroProyecto/miembroProyectoRegistrar";
+import RolProyectoRegistrar from "../components/proyecto/rolProyecto/rolProyectoRegistrar";
+import RolProyectoListar from "../components/proyecto/rolProyecto/rolProyectoListar";
+import MiembroProyectoListar from "../components/miembroProyecto/miembroProyectoListar";
+import RegistrarElementoConfiguracion from "../components/metodologia/elementoConfiguracion/ElementoConfiguracionRegistrar";
+import ElementoConfiguracionListar from "../components/metodologia/elementoConfiguracion/ElementoConfiguracionListar";
 
 const AppRouter: React.FC = () => {
   return (
@@ -115,6 +120,24 @@ const AppRouter: React.FC = () => {
         }
       />
       <Route
+        path="/proyecto/rol-listar"
+        element={
+          <Layout>
+            <Sidebar />
+            <RolProyectoListar />
+          </Layout>
+        }
+      />
+      <Route
+        path="/proyecto/rol-registrar"
+        element={
+          <Layout>
+            <Sidebar />
+            <RolProyectoRegistrar />
+          </Layout>
+        }
+      />
+      <Route
         path="/metodologia/registrar"
         element={
           <Layout>
@@ -151,6 +174,24 @@ const AppRouter: React.FC = () => {
         }
       />
             <Route
+        path="/metodologia/registrar-elementosc"
+        element={
+          <Layout>
+            <Sidebar />
+            <RegistrarElementoConfiguracion />
+          </Layout>
+        }
+      />
+      <Route
+        path="metodologia/listar-elementosc"
+        element={
+          <Layout>
+            <Sidebar />
+            <ElementoConfiguracionListar />
+          </Layout>
+        }
+      />
+      <Route
         path="miembroProyecto/registrar"
         element={
           <Layout>
@@ -159,15 +200,15 @@ const AppRouter: React.FC = () => {
           </Layout>
         }
       />
-            {/* <Route
-        path="miembroProyecto/registrar"
+      <Route
+        path="miembroProyecto/listar"
         element={
           <Layout>
             <Sidebar />
-            <FaseListar />
+            <MiembroProyectoListar />
           </Layout>
         }
-      /> */}
+      />
     </Routes>
   );
 };

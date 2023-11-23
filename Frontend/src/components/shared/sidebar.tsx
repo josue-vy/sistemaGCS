@@ -36,7 +36,7 @@ const Sidebar: React.FC = () => {
           <Menu className="w-5 h-5 inline" /> Dashboard
         </Link>
         <div className="cursor-pointer" onClick={toggleSolicitud}>
-          <FileText className="w-5 h-5 inline" /> Solicitud Cambio
+          <FileText className="w-5 h-5 inline " /> Solicitud Cambio
           <ChevronDown className="w-4 h-4 inline ml-1" />
         </div>
         {solicitudOpen && (
@@ -85,6 +85,12 @@ const Sidebar: React.FC = () => {
             <Link to="/proyecto/listar" className="block text-white hover:text-blue-500 mb-2">
               <Clipboard className="w-4 h-4 inline mr-1" /> Listar Proyecto
             </Link>
+            <Link to="/proyecto/rol-registrar" className="block text-white hover:text-blue-500 mb-2">
+              <FileText className="w-4 h-4 inline mr-1" /> Registrar Rol Proyecto
+            </Link>
+            <Link to="/proyecto/rol-listar" className="block text-white hover:text-blue-500 mb-2">
+              <Clipboard className="w-4 h-4 inline mr-1" /> Listar Rol Proyecto
+            </Link>
           </div>
         )}
       </div>
@@ -107,6 +113,12 @@ const Sidebar: React.FC = () => {
             <Link to="/metodologia/listar-fases" className="block text-white hover:text-blue-500 mb-2">
               <BarChart2 className="w-4 h-4 inline mr-1" /> Listar Fases
             </Link>
+            <Link to="/metodologia/registrar-elementosc" className="block text-white hover:text-blue-500 mb-2">
+              <Calendar className="w-4 h-4 inline mr-1" /> Registrar ElementosC
+            </Link>
+            <Link to="/metodologia/listar-elementosc" className="block text-white hover:text-blue-500 mb-2">
+              <BarChart2 className="w-4 h-4 inline mr-1" /> Listar ElementosC
+            </Link>
           </div>
         )}
       </div>
@@ -123,12 +135,6 @@ const Sidebar: React.FC = () => {
             <Link to="/miembroProyecto/listar" className="block text-white hover:text-blue-500 mb-2">
               <Layers className="w-4 h-4 inline mr-1" /> Listar Proyectos
             </Link>
-            {/* <Link to="/metodologia/registrar-fases" className="block text-white hover:text-blue-500 mb-2">
-              <Calendar className="w-4 h-4 inline mr-1" /> Registrar Fases
-            </Link>
-            <Link to="/metodologia/listar-fases" className="block text-white hover:text-blue-500 mb-2">
-              <BarChart2 className="w-4 h-4 inline mr-1" /> Listar Fases
-            </Link> */}
           </div>  
         )}
       </div>
