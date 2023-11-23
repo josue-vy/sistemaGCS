@@ -135,6 +135,12 @@ const Sidebar: React.FC = () => {
             <Link to="/miembroProyecto/listar" className="block text-white hover:text-blue-500 mb-2">
               <Layers className="w-4 h-4 inline mr-1" /> Listar Proyectos
             </Link>
+            <Link to="/miembroElemento/registrar" className="block text-white hover:text-blue-500 mb-2">
+              <FileText className="w-4 h-4 inline mr-1" /> Designar Elemento a Usuario
+            </Link>
+            <Link to="/miembroElemento/listar" className="block text-white hover:text-blue-500 mb-2">
+              <Layers className="w-4 h-4 inline mr-1" /> Listar Elementos
+            </Link>
           </div>  
         )}
       </div>

@@ -23,6 +23,8 @@ import RolProyectoListar from "../components/proyecto/rolProyecto/rolProyectoLis
 import MiembroProyectoListar from "../components/miembroProyecto/miembroProyectoListar";
 import RegistrarElementoConfiguracion from "../components/metodologia/elementoConfiguracion/ElementoConfiguracionRegistrar";
 import ElementoConfiguracionListar from "../components/metodologia/elementoConfiguracion/ElementoConfiguracionListar";
+import RegistrarMiembroElemento from "../components/miembroProyecto/miembroElemento/miembroElementoRegistrar";
+import MiembroElementoListar from "../components/miembroProyecto/miembroElemento/miembroElementoListar";
 
 const AppRouter: React.FC = () => {
   return (
@@ -206,6 +208,24 @@ const AppRouter: React.FC = () => {
           <Layout>
             <Sidebar />
             <MiembroProyectoListar />
+          </Layout>
+        }
+      />
+       <Route
+        path="miembroElemento/registrar"
+        element={
+          <Layout>
+            <Sidebar />
+            <RegistrarMiembroElemento />
+          </Layout>
+        }
+      />
+      <Route
+        path="miembroElemento/listar"
+        element={
+          <Layout>
+            <Sidebar />
+            <MiembroElementoListar />
           </Layout>
         }
       />
