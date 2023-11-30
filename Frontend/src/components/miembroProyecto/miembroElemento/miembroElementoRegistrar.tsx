@@ -15,10 +15,10 @@ const RegistrarMiembroElemento: React.FC = () => {
     nombre: "",
   });
   const [selectedElementoConfi, setSelectedElementoConfi] = useState<{
-    elementoConfiguracion: string;
+    elementosConfiguracion: string;
     nomenclaturaElemento: string;
   }>({
-    elementoConfiguracion: "",
+    elementosConfiguracion: "",
     nomenclaturaElemento: "",
   });
   const [url, setUrl] = useState<string>("");
@@ -56,7 +56,7 @@ const RegistrarMiembroElemento: React.FC = () => {
         const elementosData = elementosResponse.data.map(
           (elemento: MiembroElementoRegister) => ({
             id: elemento.id,
-            elementoConfiguracion: elemento.elementoConfiguracion,
+            elementoConfiguracion: elemento.elementosConfiguracion,
             nomenclaturaElemento: elemento.nomenclaturaElemento,
           })
         );
@@ -79,7 +79,7 @@ const RegistrarMiembroElemento: React.FC = () => {
       const newMiembroElemento: MiembroElementoRegister = {
         usuarios: [selectedUsuario.usuario],
         nombre: selectedUsuario.nombre,
-        elementoConfiguracion: selectedElementoConfi.elementoConfiguracion,
+        elementosConfiguracion: [selectedElementoConfi.elementosConfiguracion],
         nomenclaturaElemento: selectedElementoConfi.nomenclaturaElemento,
         url,
         fechaInicio,
@@ -130,11 +130,11 @@ const RegistrarMiembroElemento: React.FC = () => {
           </select>
 
           <select
-            value={selectedElementoConfi.elementoConfiguracion || ""}
+            value={selectedElementoConfi.elementosConfiguracion || ""}
             onChange={(e) =>
               setSelectedElementoConfi({
                 ...selectedElementoConfi,
-                elementoConfiguracion: e.target.value,
+                elementosConfiguracion: e.target.value,
               })
             }
             className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-400"
@@ -143,7 +143,7 @@ const RegistrarMiembroElemento: React.FC = () => {
               Seleccionar Elemento
             </option>
             {elementos.map((rol, index) => (
-              <option key={index} value={rol.elementoConfiguracion}>
+              <option key={index} value={rol.elementosConfiguracion}>
                 {rol.nomenclaturaElemento}
               </option>
             ))}

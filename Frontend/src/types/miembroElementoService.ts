@@ -2,7 +2,7 @@ export type MiembroElementoRegister = {
   id?: number;
   usuarios: string[]; // Cambio a un array de usuarios
   nombre: string;
-  elementoConfiguracion: string;
+  elementosConfiguracion: string[];
   nomenclaturaElemento: string;
   url: string;
   fechaInicio: string;
