@@ -4,7 +4,7 @@ export type UserRegister = {
   apellido: string;
   correo: string;
   contrasena: string;
-  tipoUsuario: string; // Aquí solo debería ser el nombre del tipo de usuario
+  tipoUsuario: string;
   nombreTipoUsuario?: string;
 };
 
@@ -17,4 +17,5 @@ export type UserList = {
   tipoUsuario: {
       nombreTipoUsuario: string;
     };
+  miembroUsuario?: string;
 };

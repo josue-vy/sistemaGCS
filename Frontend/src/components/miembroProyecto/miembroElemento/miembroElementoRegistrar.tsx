@@ -5,6 +5,11 @@ import { getElementoConfi } from "../../../api/elementosConfiguracion/elementoCo
 import { getUsers } from "../../../api/usuario/auth.api";
 import { postMiembroElemento } from "../../../api/miembroElemento/miembroElemento.api";
 import AlertMessage from "../../../pages/AlertMessage";
+import { getMiembroPro } from "../../../api/miembroProyecto/miembroProyecto.api";
+import { MiembroProList } from "../../../types/miembroProyectoService";
+import { UserList } from "../../../types/usuarioService";
+import { getProyecto } from "../../../api/proyecto/proyecto.api";
+import { ProyectoList } from "../../../types/proyectoService";
 
 const RegistrarMiembroElemento: React.FC = () => {
   const [selectedUsuario, setSelectedUsuario] = useState<{
@@ -22,8 +27,8 @@ const RegistrarMiembroElemento: React.FC = () => {
     nomenclaturaElemento: "",
   });
   const [url, setUrl] = useState<string>("");
-  const [fechaInicio, setFechaInicio] = useState<string>("");
-  const [fechaFin, setFechaFinal] = useState<string>("");
+  const [fechaInicio, setFechaInicio] = useState(new Date());
+  const [fechaFin, setFechaFinal] = useState(new Date());
 
   const [usuarios, setUsuarios] = useState<MiembroElementoRegister[]>([]);
   const [elementos, setElementos] = useState<MiembroElementoRegister[]>([]);
@@ -31,6 +36,7 @@ const RegistrarMiembroElemento: React.FC = () => {
   const [registrationError, setRegistrationError] = useState<string | null>(
     null
   );
+  const [proyecto, setProyecto] = useState<ProyectoList | null>(null);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const navigate = useNavigate();
@@ -38,20 +44,31 @@ const RegistrarMiembroElemento: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [usuariosResponse, elementosResponse] =
-          await Promise.all([
-            getUsers(),
-            getElementoConfi(),
-            // Fetch de otras llamadas a APIs si es necesario
-          ]);
+        const [
+          usuariosResponse,
+          elementosResponse,
+          miembrosProyectoResponse,
+          proyectoResponse,
+        ] = await Promise.all([
+          getUsers(),
+          getElementoConfi(),
+          getMiembroPro(),
+          getProyecto(),
+        ]);
 
-        const usuariosData = usuariosResponse.data.map(
-          (usuario: MiembroElementoRegister) => ({
-            id: usuario.id,
-            usuario: usuario.usuarios,
-            nombre: usuario.nombre,
-          })
+        const usuariosProyecto: string[] = miembrosProyectoResponse.data.map(
+          (miembroProyecto: MiembroProList) => miembroProyecto.usuario.nombre
         );
+
+        const usuariosData = usuariosResponse.data
+          .filter(
+            (usuario: UserList) =>
+              usuariosProyecto.indexOf(usuario.nombre) !== -1
+          )
+          .map((usuarioFiltrado: UserList) => ({
+            id: usuarioFiltrado.id,
+            nombre: usuarioFiltrado.nombre,
+          }));
 
         const elementosData = elementosResponse.data.map(
           (elemento: MiembroElementoRegister) => ({
@@ -63,9 +80,7 @@ const RegistrarMiembroElemento: React.FC = () => {
 
         setUsuarios(usuariosData);
         setElementos(elementosData);
-
-        // Establecer valores seleccionados basados en datos de miembrosElemento si es necesario
-        // ...
+        setProyecto(proyectoResponse.data);
       } catch (error) {
         console.error("Error al obtener datos:", error);
       }
@@ -76,6 +91,7 @@ const RegistrarMiembroElemento: React.FC = () => {
 
   const handleRegistration = async () => {
     try {
+
       const newMiembroElemento: MiembroElementoRegister = {
         usuarios: [selectedUsuario.usuario],
         nombre: selectedUsuario.nombre,
@@ -86,6 +102,27 @@ const RegistrarMiembroElemento: React.FC = () => {
         fechaFin,
       };
 
+      if (proyecto) {
+        const fechaInicioProyecto = new Date(proyecto.fechaInicio);
+        const fechaFinalProyecto = new Date(proyecto.fechaFinal);
+        const fechaInicioElemento = new Date(fechaInicio);
+        const fechaFinElemento = new Date(fechaFin);
+        console.log("Fecha inicio proyecto:", fechaInicioProyecto);
+        console.log("Fecha final proyecto:", fechaFinalProyecto);
+        console.log("Fecha inicio elemento:", fechaInicioElemento);
+        console.log("Fecha final elemento:", fechaFinElemento);
+
+        if (
+          fechaInicioElemento >= fechaInicioProyecto &&
+          fechaFinElemento <= fechaFinalProyecto
+        ) {
+          alert(
+            `Las fechas del elemento deben estar dentro del rango del proyecto: Fecha de inicio del proyecto: ${proyecto.fechaInicio}, Fecha final del proyecto: ${proyecto.fechaFinal}`
+          );
+          return;
+        }
+      }
+
       const response = await postMiembroElemento(newMiembroElemento);
 
       console.log("Registro exitoso:", response.data);
@@ -95,13 +132,14 @@ const RegistrarMiembroElemento: React.FC = () => {
 
       setTimeout(() => {
         window.location.reload();
-      }, 2000);
+      }, 9000);
     } catch (error) {
       console.error("Error en el registro:", error);
       setRegistrationSuccess(false);
       setRegistrationError("Error en el registro. Inténtalo de nuevo.");
     }
   };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="max-w-md w-full">
@@ -157,15 +195,15 @@ const RegistrarMiembroElemento: React.FC = () => {
             className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-400"
           />
           <input
-            type="datetime-local"
-            value={fechaInicio}
-            onChange={(e) => setFechaInicio(e.target.value)}
+            type="date"
+            value={fechaInicio.toISOString().split("T")[0]} 
+            onChange={(e) => setFechaInicio(new Date(e.target.value))}
             className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-400"
           />
           <input
-            type="datetime-local"
-            value={fechaFin}
-            onChange={(e) => setFechaFinal(e.target.value)}
+            type="date"
+            value={fechaFin.toISOString().split("T")[0]} 
+            onChange={(e) => setFechaFinal(new Date(e.target.value))}
             className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-400"
           />
           <div>

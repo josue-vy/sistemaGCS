@@ -1,12 +1,12 @@
 export type MiembroElementoRegister = {
   id?: number;
-  usuarios: string[]; // Cambio a un array de usuarios
+  usuarios: string[];
   nombre: string;
   elementosConfiguracion: string[];
   nomenclaturaElemento: string;
   url: string;
-  fechaInicio: string;
-  fechaFin: string;
+  fechaInicio: Date;
+  fechaFin: Date;
 };
 
 export type MiembroElementoList = {
@@ -18,8 +18,8 @@ export type MiembroElementoList = {
       nomenclaturaElemento: string;
     } | null;
     url: string;
-    fechaInicio: string;
-    fechaFin: string;
+    fechaInicio: Date;
+    fechaFin: Date;
     nombreUsuario?: string; 
     nomenclaturaElemento?: string; 
 

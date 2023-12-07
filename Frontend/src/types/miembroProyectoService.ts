@@ -1,6 +1,6 @@
 export type MiembroProRegister = {
   id?: number;
-  usuarios: string[]; // Cambia 'usuario' a 'usuarios'
+  usuarios: string[];
   nombre: string;
   rol: string;
   nombreRolProyecto: string;

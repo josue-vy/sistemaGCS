@@ -1,8 +1,8 @@
 export type ProyectoCreate= {
     id?: number;
     nombreProyecto: string;
-    fechaInicio: string;
-    fechaFinal: string;
+    fechaInicio: Date;
+    fechaFinal: Date;
     estado: string;
     metodologia: string;
     nombreMetodologia?: string;
@@ -11,8 +11,8 @@ export type ProyectoCreate= {
 export type ProyectoList= {
     id?: string;
     nombreProyecto: string;
-    fechaInicio: string;
-    fechaFinal: string;
+    fechaInicio: Date;
+    fechaFinal: Date;
     estado: string;
     metodologia:{
       nombreMetodologia: string

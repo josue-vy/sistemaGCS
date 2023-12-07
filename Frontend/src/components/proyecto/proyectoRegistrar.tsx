@@ -7,8 +7,8 @@ import AlertMessage from "../../pages/AlertMessage";
 
 const RegistrarProyecto: React.FC = () => {
   const [nombreProyecto, setNamePro] = useState("");
-  const [fechaInicio, setInicio] = useState("");
-  const [fechaFinal, setFinal] = useState("");
+  const [fechaInicio, setInicio] = useState(new Date());
+  const [fechaFinal, setFinal] = useState(new Date());
   const [estado, setEstado] = useState("");
   const [selectedMetodologia, setSelectedMetodologia] = useState<{
     metodologia: string;
@@ -48,7 +48,6 @@ const RegistrarProyecto: React.FC = () => {
         metodologia: selectedMetodologia.metodologia,
         nombreMetodologia: selectedMetodologia.nombreMetodologia,
       };
-
       const response = await postProyecto(newProyecto);
       console.log("Registro exitoso:", response.data);
 
@@ -65,7 +64,6 @@ const RegistrarProyecto: React.FC = () => {
       setRegistrationError("Error en el registro. Inténtalo de nuevo.");
     }
   };
-
   const handleEstadoChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     // Manejar cambios en el estado del proyecto
     console.log("Nuevo estado seleccionado:", e.target.value);
@@ -93,8 +91,8 @@ const RegistrarProyecto: React.FC = () => {
             {/* Input para la fecha de inicio */}
             <input
               type="date"
-              value={fechaInicio}
-              onChange={(e) => setInicio(e.target.value)}
+              value={fechaInicio.toISOString().split("T")[0]}
+              onChange={(e) => setInicio(new Date(e.target.value))}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-400"
             />
           </div>
@@ -102,8 +100,8 @@ const RegistrarProyecto: React.FC = () => {
             {/* Input para la fecha final */}
             <input
               type="date"
-              value={fechaFinal}
-              onChange={(e) => setFinal(e.target.value)}
+              value={fechaFinal.toISOString().split("T")[0]} 
+              onChange={(e) => setFinal(new Date(e.target.value))}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-400"
             />
           </div>

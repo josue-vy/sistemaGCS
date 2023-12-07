@@ -10,7 +10,12 @@ const MiembroElementoListar: React.FC = () => {
       try {
         const response = await getMiembroElemento();
         if (Array.isArray(response.data.data)) {
-          setUsuarios(response.data.data);
+          const usuariosData = response.data.data.map((usuario: MiembroElementoList) => ({
+            ...usuario,
+            fechaInicio: new Date(usuario.fechaInicio),
+            fechaFin: new Date(usuario.fechaFin)
+          }));
+          setUsuarios(usuariosData);
         } else {
           console.error("Los datos no son un array:", response.data.data);
         }
@@ -18,11 +23,11 @@ const MiembroElementoListar: React.FC = () => {
         console.error("Error al obtener datos:", error);
       }
     };
-
+  
     fetchData();
   }, []);
 
-  const calcularTiempoRestante = (fechaInicio: string, fechaFin: string) => {
+  const calcularTiempoRestante = (fechaInicio: Date, fechaFin: Date) => {
     const inicio = new Date(fechaInicio).getTime();
     const fin = new Date(fechaFin).getTime();
     const diff = fin - inicio;
@@ -61,8 +66,16 @@ const MiembroElementoListar: React.FC = () => {
                   <td className="py-4 px-6 border-b border-gray-300">
                     {usuario.nomenclaturaElemento ? usuario.nomenclaturaElemento : "Sin elemento"}
                   </td>
-                  <td className="py-4 px-6 border-b border-gray-300">{usuario.fechaInicio}</td>
-                  <td className="py-4 px-6 border-b border-gray-300">{usuario.fechaFin}</td>
+                  <td className="py-4 px-6 border-b border-gray-300">
+                    {usuario.fechaInicio instanceof Date
+                      ? usuario.fechaInicio.toLocaleDateString()
+                      : "Fecha de inicio inválida"}
+                  </td>
+                  <td className="py-4 px-6 border-b border-gray-300">
+                    {usuario.fechaFin instanceof Date
+                      ? usuario.fechaFin.toLocaleDateString()
+                      : "Fecha final inválida"}
+                  </td>
                   <td className="py-4 px-6 border-b border-gray-300">
                     {calcularTiempoRestante(usuario.fechaInicio, usuario.fechaFin)} días restantes
                   </td>
